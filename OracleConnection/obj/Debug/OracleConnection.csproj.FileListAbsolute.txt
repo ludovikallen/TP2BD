@@ -1,0 +1,25 @@
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\bin\Debug\OracleConnection.exe.config
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\bin\Debug\OracleConnection.exe
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\bin\Debug\OracleConnection.pdb
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\obj\Debug\OracleConnection.csprojResolveAssemblyReference.cache
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\obj\Debug\OracleConn.Form1.resources
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\obj\Debug\OracleConnection.Properties.Resources.resources
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\obj\Debug\OracleConnection.csproj.GenerateResource.cache
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\obj\Debug\OracleConnection.csproj.CoreCompileInputs.cache
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\obj\Debug\OracleConnection.csproj.CopyComplete
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\obj\Debug\OracleConnection.exe
+C:\Users\201563814\source\repos\OracleConnection\OracleConnection\obj\Debug\OracleConnection.pdb
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\bin\Debug\OracleConnection.exe.config
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\bin\Debug\OracleConnection.exe
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\bin\Debug\OracleConnection.pdb
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.csprojResolveAssemblyReference.cache
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConn.Form1.resources
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.Properties.Resources.resources
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.csproj.GenerateResource.cache
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.csproj.CoreCompileInputs.cache
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.csproj.CopyComplete
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.exe
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.pdb
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.Ajouter.resources
