@@ -157,25 +157,50 @@ namespace OracleConn
 
         private void CB_Recherche_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            rechercheDisque();
+            if (CB_Recherche.SelectedIndex > 0)
+            {
+                string STL =
+                    "select count(disques.codecategorie), nomcategorie from disques inner join categoriedisque on categoriedisque.CODECATEGORIE = disques.codecategorie where nomcategorie = '" + CB_Recherche.Text + "' group by nomcategorie";
+                OracleCommand listeDiv = new OracleCommand(STL, conn);
+                listeDiv.CommandType = CommandType.Text;
+                decimal number = 0;
+                OracleDataReader divisionReader = listeDiv.ExecuteReader();
+                while (divisionReader.Read())
+                {
+                    number = divisionReader.GetDecimal(0);
+                }
+                divisionReader.Close();
+                if (number > 1)
+                {
+                    MessageBox.Show(number + " titres dans " + CB_Recherche.Text);
+                }
+                else
+                {
+                    MessageBox.Show(number + " titre dans " + CB_Recherche.Text);
+                }
+
+            }
+        }
+
+        void rechercheDisque()
+        {
             try
             {
                 if (CB_Recherche.SelectedIndex > 0)
                 {
                     DGV_Disque.Rows.Clear();
-                    string codeCategorieCommand = "select codecategorie from CATEGORIEDISQUE where nomcategorie = '" + CB_Recherche.Text + "'";
-                    string codeCategorie = "";
-                    OracleCommand listeDiv = new OracleCommand(codeCategorieCommand, conn);
-                    listeDiv.CommandType = CommandType.Text;
-                    OracleDataReader divisionReader = listeDiv.ExecuteReader();
-                    while (divisionReader.Read())
+                    string sqlEquipe;
+                    if (TB_Recherche.Text.Trim() == "")
                     {
-                        codeCategorie = divisionReader.GetString(0);
+                        sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE where nomcategorie = '" + CB_Recherche.Text + "'";
                     }
-                    string sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE where nomcategorie = '" + CB_Recherche.Text + "'";
+                    else
+                    {
+                        sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE where nomcategorie = '" + CB_Recherche.Text + "' and titredisque like '" + TB_Recherche.Text.Trim() + "%'";
+                    }
 
                     OracleCommand listeEquipe = new OracleCommand(sqlEquipe, conn);
-
                     listeEquipe.CommandType = CommandType.Text;
                     OracleDataReader equipeReader = listeEquipe.ExecuteReader();
                     while (equipeReader.Read())
@@ -186,14 +211,44 @@ namespace OracleConn
                 }
                 else if (CB_Recherche.SelectedIndex == 0)
                 {
-                    remplirDisque();
+                    DGV_Disque.Rows.Clear();
+                    if (TB_Recherche.Text.Trim() == "")
+                    {
+                        remplirDisque();
+                    }
+                    else
+                    {
+                        string sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE where titredisque like '" + TB_Recherche.Text.Trim() + "%'";
+                        OracleCommand listeEquipe = new OracleCommand(sqlEquipe, conn);
+                        listeEquipe.CommandType = CommandType.Text;
+                        OracleDataReader equipeReader = listeEquipe.ExecuteReader();
+                        while (equipeReader.Read())
+                        {
+                            DGV_Disque.Rows.Add(equipeReader.GetDecimal(0), equipeReader.GetString(1), equipeReader.GetString(2), equipeReader.GetDecimal(3), equipeReader.GetString(4));
+                        }
+                        equipeReader.Close();
+                    }
+
                 }
-                
+
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
             }
+        }
+
+        private void TB_Recherche_TextChanged(object sender, EventArgs e)
+        {
+            rechercheDisque();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string sql = "DELETE FROM disques WHERE nodisques = "+ Convert.ToInt32(DGV_Disque.CurrentRow.Cells[0].Value);
+            OracleCommand oraAjoutDiv = new OracleCommand(sql, conn);
+            int n = oraAjoutDiv.ExecuteNonQuery();
+            MessageBox.Show(n + " ligne retirées");
         }
     }
 }

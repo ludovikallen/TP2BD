@@ -42,6 +42,7 @@
             this.LB_RechercheCategorie = new System.Windows.Forms.Label();
             this.LB_RechercheMots = new System.Windows.Forms.Label();
             this.BT_Refresh = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Disque)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,6 +99,7 @@
             this.TB_Recherche.Name = "TB_Recherche";
             this.TB_Recherche.Size = new System.Drawing.Size(100, 20);
             this.TB_Recherche.TabIndex = 9;
+            this.TB_Recherche.TextChanged += new System.EventHandler(this.TB_Recherche_TextChanged);
             // 
             // CB_Recherche
             // 
@@ -165,11 +167,22 @@
             this.BT_Refresh.UseVisualStyleBackColor = true;
             this.BT_Refresh.Click += new System.EventHandler(this.BT_Refresh_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(256, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Supprimer";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 219);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.BT_Refresh);
             this.Controls.Add(this.LB_RechercheMots);
             this.Controls.Add(this.LB_RechercheCategorie);
@@ -205,6 +218,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn annee;
         private System.Windows.Forms.DataGridViewTextBoxColumn categorie;
         private System.Windows.Forms.Button BT_Refresh;
+        private System.Windows.Forms.Button button1;
     }
 }
 
