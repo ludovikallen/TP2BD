@@ -163,6 +163,7 @@
             this.Name = "AjouterForm";
             this.Text = "Ajouter";
             this.Load += new System.EventHandler(this.Ajouter_Load);
+            this.TextChanged += new System.EventHandler(this.AjouterForm_TextChanged);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

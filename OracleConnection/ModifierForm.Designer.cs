@@ -38,20 +38,24 @@
             this.LB_Ajouter = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.LB_Id = new System.Windows.Forms.Label();
+            this.TB_Chanteur = new System.Windows.Forms.TextBox();
+            this.LB_Chanteur = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(78, 103);
+            this.comboBox1.Location = new System.Drawing.Point(78, 124);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 23;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(118, 80);
+            this.numericUpDown1.Location = new System.Drawing.Point(118, 101);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             2018,
             0,
@@ -70,18 +74,20 @@
             0,
             0,
             0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(54, 57);
+            this.textBox1.Location = new System.Drawing.Point(54, 78);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(145, 20);
             this.textBox1.TabIndex = 21;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // LB_Categorie
             // 
             this.LB_Categorie.AutoSize = true;
-            this.LB_Categorie.Location = new System.Drawing.Point(17, 106);
+            this.LB_Categorie.Location = new System.Drawing.Point(17, 127);
             this.LB_Categorie.Name = "LB_Categorie";
             this.LB_Categorie.Size = new System.Drawing.Size(55, 13);
             this.LB_Categorie.TabIndex = 20;
@@ -90,7 +96,7 @@
             // LB_Annee
             // 
             this.LB_Annee.AutoSize = true;
-            this.LB_Annee.Location = new System.Drawing.Point(17, 83);
+            this.LB_Annee.Location = new System.Drawing.Point(17, 104);
             this.LB_Annee.Name = "LB_Annee";
             this.LB_Annee.Size = new System.Drawing.Size(95, 13);
             this.LB_Annee.TabIndex = 19;
@@ -99,7 +105,7 @@
             // LB_Nom
             // 
             this.LB_Nom.AutoSize = true;
-            this.LB_Nom.Location = new System.Drawing.Point(17, 60);
+            this.LB_Nom.Location = new System.Drawing.Point(17, 81);
             this.LB_Nom.Name = "LB_Nom";
             this.LB_Nom.Size = new System.Drawing.Size(32, 13);
             this.LB_Nom.TabIndex = 18;
@@ -108,12 +114,13 @@
             // BT_Ajouter
             // 
             this.BT_Ajouter.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.BT_Ajouter.Location = new System.Drawing.Point(17, 130);
+            this.BT_Ajouter.Location = new System.Drawing.Point(17, 151);
             this.BT_Ajouter.Name = "BT_Ajouter";
             this.BT_Ajouter.Size = new System.Drawing.Size(75, 23);
             this.BT_Ajouter.TabIndex = 17;
             this.BT_Ajouter.Text = "Modifier";
             this.BT_Ajouter.UseVisualStyleBackColor = true;
+            this.BT_Ajouter.Click += new System.EventHandler(this.BT_Ajouter_Click);
             // 
             // LB_Ajouter
             // 
@@ -142,11 +149,30 @@
             this.LB_Id.TabIndex = 25;
             this.LB_Id.Text = "label2";
             // 
+            // TB_Chanteur
+            // 
+            this.TB_Chanteur.Location = new System.Drawing.Point(76, 54);
+            this.TB_Chanteur.Name = "TB_Chanteur";
+            this.TB_Chanteur.Size = new System.Drawing.Size(123, 20);
+            this.TB_Chanteur.TabIndex = 27;
+            this.TB_Chanteur.TextChanged += new System.EventHandler(this.TB_Chanteur_TextChanged);
+            // 
+            // LB_Chanteur
+            // 
+            this.LB_Chanteur.AutoSize = true;
+            this.LB_Chanteur.Location = new System.Drawing.Point(17, 57);
+            this.LB_Chanteur.Name = "LB_Chanteur";
+            this.LB_Chanteur.Size = new System.Drawing.Size(53, 13);
+            this.LB_Chanteur.TabIndex = 26;
+            this.LB_Chanteur.Text = "Chanteur:";
+            // 
             // Modifier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(211, 162);
+            this.ClientSize = new System.Drawing.Size(211, 184);
+            this.Controls.Add(this.TB_Chanteur);
+            this.Controls.Add(this.LB_Chanteur);
             this.Controls.Add(this.LB_Id);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
@@ -179,5 +205,7 @@
         private System.Windows.Forms.Label LB_Ajouter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LB_Id;
+        private System.Windows.Forms.TextBox TB_Chanteur;
+        private System.Windows.Forms.Label LB_Chanteur;
     }
 }

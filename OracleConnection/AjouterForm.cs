@@ -19,6 +19,7 @@ namespace OracleConnection
         {
             InitializeComponent();
         }
+
         public AjouterForm(Oracle.ManagedDataAccess.Client.OracleConnection connection)
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace OracleConnection
             remplirCategorie();
             BT_Ajouter.Enabled = false;
         }
+
         void remplirCategorie()
         {
             CB_Recherche.Items.Clear();
@@ -66,6 +68,7 @@ namespace OracleConnection
                 BT_Ajouter.Enabled = false;
             }
         }
+
         private void BT_Ajouter_Click(object sender, EventArgs e)
         {
             try
@@ -80,13 +83,13 @@ namespace OracleConnection
                     codeCategorie = divisionReader.GetString(0);
                 }
 
-                string SQL = "insert into disques values(40, '"+TB_Nom.Text.Trim() + "', '" + TB_Chanteur.Text.Trim()+"', " + numericUpDown1.Value+", '" +codeCategorie+"')";
-                string SQL2 = SQL;
+                string SQL = "insert into disques values(41, '"+TB_Nom.Text.Trim() + "', '" + TB_Chanteur.Text.Trim()+"', " + numericUpDown1.Value+", '" +codeCategorie+"')";
+                //string SQL2 = SQL;
 
-                OracleCommand oraAjoutDiv = new OracleCommand(SQL2, conn);
+                OracleCommand oraAjoutDiv = new OracleCommand(SQL, conn);
 
                 int n = oraAjoutDiv.ExecuteNonQuery();
-                MessageBox.Show(n + " ligne ajoutées");
+                MessageBox.Show(n + " ligne ajoutée");
             }
             catch (Exception se)
             {
@@ -109,5 +112,9 @@ namespace OracleConnection
             verifierComplet();
         }
 
+        private void AjouterForm_TextChanged(object sender, EventArgs e)
+        {
+            verifierComplet();
+        }
     }
 }

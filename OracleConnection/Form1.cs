@@ -154,5 +154,46 @@ namespace OracleConn
         {
             remplirDisque();
         }
+
+        private void CB_Recherche_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+            try
+            {
+                if (CB_Recherche.SelectedIndex > 0)
+                {
+                    DGV_Disque.Rows.Clear();
+                    string codeCategorieCommand = "select codecategorie from CATEGORIEDISQUE where nomcategorie = '" + CB_Recherche.Text + "'";
+                    string codeCategorie = "";
+                    OracleCommand listeDiv = new OracleCommand(codeCategorieCommand, conn);
+                    listeDiv.CommandType = CommandType.Text;
+                    OracleDataReader divisionReader = listeDiv.ExecuteReader();
+                    while (divisionReader.Read())
+                    {
+                        codeCategorie = divisionReader.GetString(0);
+                    }
+                    string sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE where nomcategorie = '" + CB_Recherche.Text + "'";
+
+                    OracleCommand listeEquipe = new OracleCommand(sqlEquipe, conn);
+
+                    listeEquipe.CommandType = CommandType.Text;
+                    OracleDataReader equipeReader = listeEquipe.ExecuteReader();
+                    while (equipeReader.Read())
+                    {
+                        DGV_Disque.Rows.Add(equipeReader.GetDecimal(0), equipeReader.GetString(1), equipeReader.GetString(2), equipeReader.GetDecimal(3), equipeReader.GetString(4));
+                    }
+                    equipeReader.Close();
+                }
+                else if (CB_Recherche.SelectedIndex == 0)
+                {
+                    remplirDisque();
+                }
+                
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+        }
     }
 }

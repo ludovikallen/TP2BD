@@ -106,6 +106,7 @@
             this.CB_Recherche.Name = "CB_Recherche";
             this.CB_Recherche.Size = new System.Drawing.Size(121, 21);
             this.CB_Recherche.TabIndex = 10;
+            this.CB_Recherche.SelectedIndexChanged += new System.EventHandler(this.CB_Recherche_SelectedIndexChanged);
             // 
             // BT_Ajouter
             // 
