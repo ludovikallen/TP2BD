@@ -186,6 +186,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Modifier";
             this.Text = "Modifier";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Modifier_FormClosing);
             this.Load += new System.EventHandler(this.Modifier_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);

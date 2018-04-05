@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,19 +20,24 @@ namespace OracleConn
             InitializeComponent();
             
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+
             Connecter();
             BT_Modifier.Enabled = false;
 
             remplirRechercheCategorie();
             remplirDisque();
-            //DGV_Disque.Rows.Add(0, 0, 0);
-            //DGV_Disque.Rows.Add(0, 0, 0);
 
+            TB_Nom.DataBindings.Add("Text", dataSet, "listeDisque.titredisque");
+            TB_Chanteur.DataBindings.Add("Text", dataSet, "listeDisque.nomartiste");
+            TB_Annee.DataBindings.Add("Text", dataSet, "listeDisque.anneedisque");
+            TB_Categorie.DataBindings.Add("Text", dataSet, "listeDisque.nomcategorie");
         }
-        public Oracle.ManagedDataAccess.Client.OracleConnection conn = new Oracle.ManagedDataAccess.Client.OracleConnection();
 
+        public Oracle.ManagedDataAccess.Client.OracleConnection conn = new Oracle.ManagedDataAccess.Client.OracleConnection();
+        public DataSet dataSet = new DataSet();
 
 
         private void Connecter()
@@ -68,39 +74,21 @@ namespace OracleConn
         {
             Deconnecter();
         }
-       
-
-        private void DGV_Disque_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            modifierDisque();
-
-            //MessageBox.Show(e.RowIndex.ToString());
-        }
-
-        private void DGV_Disque_SelectionChanged(object sender, EventArgs e)
-        {
-            if (DGV_Disque.CurrentCell.RowIndex >= 0)
-            {
-                BT_Modifier.Enabled = true;
-            }
-        }
 
         private void BT_Ajouter_Click(object sender, EventArgs e)
         {
-            var popup = new AjouterForm(conn);
+            var popup = new AjouterForm(conn, dataSet, DGV_Disque);
             DialogResult dialogresult = popup.ShowDialog();
-
         }
 
         private void BT_Modifier_Click(object sender, EventArgs e)
         {
             modifierDisque();
-
         }
 
         void modifierDisque()
         {
-            var popup = new Modifier(conn, Convert.ToInt32(DGV_Disque.CurrentRow.Cells[0].Value));
+            var popup = new Modifier(conn, Convert.ToInt32(DGV_Disque.CurrentRow.Cells[0].Value), dataSet, DGV_Disque);
             DialogResult dialogresult = popup.ShowDialog();
         }
 
@@ -130,31 +118,28 @@ namespace OracleConn
 
         public void remplirDisque()
         {
-            string sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE order by nodisques";
-            DGV_Disque.Rows.Clear();
             try
             {
-                OracleCommand listeEquipe = new OracleCommand(sqlEquipe, conn);
+                string sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE order by nodisques";
+                OracleDataAdapter adapter = new OracleDataAdapter(sqlEquipe, conn);
 
-                listeEquipe.CommandType = CommandType.Text;
-                OracleDataReader equipeReader = listeEquipe.ExecuteReader();
-                while (equipeReader.Read())
+                if (dataSet.Tables.Contains("listeDisque"))
                 {
-                    DGV_Disque.Rows.Add(equipeReader.GetDecimal(0), equipeReader.GetString(1), equipeReader.GetString(2), equipeReader.GetDecimal(3), equipeReader.GetString(4));
+                    dataSet.Tables["listeDisque"].Clear();
                 }
-                equipeReader.Close();
+
+                adapter.Fill(dataSet, "listeDisque");
+                BindingSource source;
+                source = new BindingSource(dataSet, "listeDisque");
+                DGV_Disque.DataSource = source;
+                adapter.Dispose();
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
             }
         }
-
-        private void BT_Refresh_Click(object sender, EventArgs e)
-        {
-            remplirDisque();
-        }
-
+        
         private void CB_Recherche_SelectedIndexChanged(object sender, EventArgs e)
         {
             rechercheDisque();
@@ -189,29 +174,45 @@ namespace OracleConn
             {
                 if (CB_Recherche.SelectedIndex > 0)
                 {
-                    DGV_Disque.Rows.Clear();
+                    DGV_Disque.DataSource = null;
                     string sqlEquipe;
                     if (TB_Recherche.Text.Trim() == "")
                     {
                         sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE where nomcategorie = '" + CB_Recherche.Text + "'";
+                        OracleDataAdapter adapter = new OracleDataAdapter(sqlEquipe, conn);
+
+                        if (dataSet.Tables.Contains("listeDisque"))
+                        {
+                            dataSet.Tables["listeDisque"].Clear();
+                        }
+
+                        adapter.Fill(dataSet, "listeDisque");
+                        BindingSource source;
+                        source = new BindingSource(dataSet, "listeDisque");
+                        DGV_Disque.DataSource = source;
+                        adapter.Dispose();
                     }
                     else
                     {
+                        
                         sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE where nomcategorie = '" + CB_Recherche.Text + "' and titredisque like '" + TB_Recherche.Text.Trim() + "%'";
-                    }
+                        OracleDataAdapter adapter = new OracleDataAdapter(sqlEquipe, conn);
 
-                    OracleCommand listeEquipe = new OracleCommand(sqlEquipe, conn);
-                    listeEquipe.CommandType = CommandType.Text;
-                    OracleDataReader equipeReader = listeEquipe.ExecuteReader();
-                    while (equipeReader.Read())
-                    {
-                        DGV_Disque.Rows.Add(equipeReader.GetDecimal(0), equipeReader.GetString(1), equipeReader.GetString(2), equipeReader.GetDecimal(3), equipeReader.GetString(4));
+                        if (dataSet.Tables.Contains("listeDisque"))
+                        {
+                            dataSet.Tables["listeDisque"].Clear();
+                        }
+
+                        adapter.Fill(dataSet, "listeDisque");
+                        BindingSource source;
+                        source = new BindingSource(dataSet, "listeDisque");
+                        DGV_Disque.DataSource = source;
+                        adapter.Dispose();
                     }
-                    equipeReader.Close();
                 }
                 else if (CB_Recherche.SelectedIndex == 0)
                 {
-                    DGV_Disque.Rows.Clear();
+                    DGV_Disque.DataSource = null;
                     if (TB_Recherche.Text.Trim() == "")
                     {
                         remplirDisque();
@@ -219,14 +220,18 @@ namespace OracleConn
                     else
                     {
                         string sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE where titredisque like '" + TB_Recherche.Text.Trim() + "%'";
-                        OracleCommand listeEquipe = new OracleCommand(sqlEquipe, conn);
-                        listeEquipe.CommandType = CommandType.Text;
-                        OracleDataReader equipeReader = listeEquipe.ExecuteReader();
-                        while (equipeReader.Read())
+                        OracleDataAdapter adapter = new OracleDataAdapter(sqlEquipe, conn);
+
+                        if (dataSet.Tables.Contains("listeDisque"))
                         {
-                            DGV_Disque.Rows.Add(equipeReader.GetDecimal(0), equipeReader.GetString(1), equipeReader.GetString(2), equipeReader.GetDecimal(3), equipeReader.GetString(4));
+                            dataSet.Tables["listeDisque"].Clear();
                         }
-                        equipeReader.Close();
+
+                        adapter.Fill(dataSet, "listeDisque");
+                        BindingSource source;
+                        source = new BindingSource(dataSet, "listeDisque");
+                        DGV_Disque.DataSource = source;
+                        adapter.Dispose();
                     }
 
                 }
@@ -248,7 +253,37 @@ namespace OracleConn
             string sql = "DELETE FROM disques WHERE nodisques = "+ Convert.ToInt32(DGV_Disque.CurrentRow.Cells[0].Value);
             OracleCommand oraAjoutDiv = new OracleCommand(sql, conn);
             int n = oraAjoutDiv.ExecuteNonQuery();
+            remplirDisque();
             MessageBox.Show(n + " ligne retirées");
+
+        }
+
+        private void DGV_Disque_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            modifierDisque();
+        }
+
+        private void DGV_Disque_SelectionChanged_1(object sender, EventArgs e)
+        {
+            if (DGV_Disque.CurrentCell != null)
+            {
+                if (DGV_Disque.CurrentCell.RowIndex >= 0)
+                {
+                    BT_Modifier.Enabled = true;
+                }
+            }
+            
+        }
+
+        private void BT_Precedent_Click(object sender, EventArgs e)
+        {
+            this.BindingContext[dataSet, "listedisque"].Position -= 1;
+
+        }
+
+        private void BT_Suivant_Click(object sender, EventArgs e)
+        {
+            this.BindingContext[dataSet, "listedisque"].Position += 1;
         }
     }
 }

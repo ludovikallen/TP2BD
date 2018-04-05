@@ -20,12 +20,15 @@ namespace OracleConnection
             InitializeComponent();
         }
 
-        public AjouterForm(Oracle.ManagedDataAccess.Client.OracleConnection connection)
+        public AjouterForm(Oracle.ManagedDataAccess.Client.OracleConnection connection, DataSet dataSet, DataGridView dgv)
         {
             InitializeComponent();
             conn = connection;
+            data = dataSet;
+            dataGridView = dgv;
         }
-
+        DataSet data = new DataSet();
+        DataGridView dataGridView = new DataGridView();
         public Oracle.ManagedDataAccess.Client.OracleConnection conn;
 
         private void Ajouter_Load(object sender, EventArgs e)
@@ -83,7 +86,7 @@ namespace OracleConnection
                     codeCategorie = divisionReader.GetString(0);
                 }
 
-                string SQL = "insert into disques values(41, '"+TB_Nom.Text.Trim() + "', '" + TB_Chanteur.Text.Trim()+"', " + numericUpDown1.Value+", '" +codeCategorie+"')";
+                string SQL = "insert into disques values(seqDisque.nextval, '" + TB_Nom.Text.Trim() + "', '" + TB_Chanteur.Text.Trim()+"', " + numericUpDown1.Value+", '" +codeCategorie+"')";
                 //string SQL2 = SQL;
 
                 OracleCommand oraAjoutDiv = new OracleCommand(SQL, conn);
@@ -115,6 +118,31 @@ namespace OracleConnection
         private void AjouterForm_TextChanged(object sender, EventArgs e)
         {
             verifierComplet();
+        }
+
+        private void AjouterForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                string sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE order by nodisques";
+
+                OracleDataAdapter adapter = new OracleDataAdapter(sqlEquipe, conn);
+
+                if (data.Tables.Contains("listeDisque"))
+                {
+                    data.Tables["listeDisque"].Clear();
+                }
+
+                adapter.Fill(data, "listeDisque");
+                BindingSource source;
+                source = new BindingSource(data, "listeDisque");
+                dataGridView.DataSource = source;
+                adapter.Dispose();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }

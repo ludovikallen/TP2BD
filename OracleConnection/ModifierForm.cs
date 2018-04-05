@@ -17,13 +17,16 @@ namespace OracleConnection
         {
             InitializeComponent();
         }
-        public Modifier(Oracle.ManagedDataAccess.Client.OracleConnection connection, int num)
+        public Modifier(Oracle.ManagedDataAccess.Client.OracleConnection connection, int num, DataSet dataSet, DataGridView dgv)
         {
             InitializeComponent();
             conn = connection;
             numId = num;
+            data = dataSet;
+            dataGridView = dgv;
         }
-
+        DataSet data = new DataSet();
+        DataGridView dataGridView = new DataGridView();
         public Oracle.ManagedDataAccess.Client.OracleConnection conn;
         private int numId;
 
@@ -134,6 +137,31 @@ namespace OracleConnection
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
             verifierComplet();
+        }
+
+        private void Modifier_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                string sqlEquipe = "select nodisques,titredisque, nomartiste, anneedisque, nomcategorie from disques inner join CATEGORIEDISQUE on categoriedisque.codecategorie = disques.CODECATEGORIE order by nodisques";
+
+                OracleDataAdapter adapter = new OracleDataAdapter(sqlEquipe, conn);
+
+                if (data.Tables.Contains("listeDisque"))
+                {
+                    data.Tables["listeDisque"].Clear();
+                }
+
+                adapter.Fill(data, "listeDisque");
+                BindingSource source;
+                source = new BindingSource(data, "listeDisque");
+                dataGridView.DataSource = source;
+                adapter.Dispose();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }

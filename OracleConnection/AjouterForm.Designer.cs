@@ -162,6 +162,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AjouterForm";
             this.Text = "Ajouter";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AjouterForm_FormClosing);
             this.Load += new System.EventHandler(this.Ajouter_Load);
             this.TextChanged += new System.EventHandler(this.AjouterForm_TextChanged);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

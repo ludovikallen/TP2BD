@@ -28,12 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DGV_Disque = new System.Windows.Forms.DataGridView();
-            this.numSequentiel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomDisque = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomArtiste = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.annee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categorie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TB_Recherche = new System.Windows.Forms.TextBox();
             this.CB_Recherche = new System.Windows.Forms.ComboBox();
             this.BT_Ajouter = new System.Windows.Forms.Button();
@@ -41,57 +35,20 @@
             this.LB_Recherche = new System.Windows.Forms.Label();
             this.LB_RechercheCategorie = new System.Windows.Forms.Label();
             this.LB_RechercheMots = new System.Windows.Forms.Label();
-            this.BT_Refresh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.DGV_Disque = new System.Windows.Forms.DataGridView();
+            this.TB_Nom = new System.Windows.Forms.TextBox();
+            this.TB_Chanteur = new System.Windows.Forms.TextBox();
+            this.TB_Annee = new System.Windows.Forms.TextBox();
+            this.TB_Categorie = new System.Windows.Forms.TextBox();
+            this.LB_Nom = new System.Windows.Forms.Label();
+            this.LB_Chanteur = new System.Windows.Forms.Label();
+            this.LB_Annee = new System.Windows.Forms.Label();
+            this.LB_Categorie = new System.Windows.Forms.Label();
+            this.BT_Precedent = new System.Windows.Forms.Button();
+            this.BT_Suivant = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Disque)).BeginInit();
             this.SuspendLayout();
-            // 
-            // DGV_Disque
-            // 
-            this.DGV_Disque.AllowUserToAddRows = false;
-            this.DGV_Disque.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_Disque.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.numSequentiel,
-            this.nomDisque,
-            this.nomArtiste,
-            this.annee,
-            this.categorie});
-            this.DGV_Disque.Location = new System.Drawing.Point(12, 51);
-            this.DGV_Disque.Name = "DGV_Disque";
-            this.DGV_Disque.Size = new System.Drawing.Size(665, 150);
-            this.DGV_Disque.TabIndex = 8;
-            this.DGV_Disque.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Disque_CellDoubleClick);
-            this.DGV_Disque.SelectionChanged += new System.EventHandler(this.DGV_Disque_SelectionChanged);
-            // 
-            // numSequentiel
-            // 
-            this.numSequentiel.HeaderText = "Numéro Séquenciel";
-            this.numSequentiel.Name = "numSequentiel";
-            this.numSequentiel.Width = 125;
-            // 
-            // nomDisque
-            // 
-            this.nomDisque.HeaderText = "Nom du disque";
-            this.nomDisque.Name = "nomDisque";
-            this.nomDisque.Width = 125;
-            // 
-            // nomArtiste
-            // 
-            this.nomArtiste.HeaderText = "Nom de l\'artiste";
-            this.nomArtiste.Name = "nomArtiste";
-            this.nomArtiste.Width = 125;
-            // 
-            // annee
-            // 
-            this.annee.HeaderText = "Année de la sortie";
-            this.annee.Name = "annee";
-            this.annee.Width = 125;
-            // 
-            // categorie
-            // 
-            this.categorie.HeaderText = "Catégorie";
-            this.categorie.Name = "categorie";
-            this.categorie.Width = 125;
             // 
             // TB_Recherche
             // 
@@ -157,19 +114,9 @@
             this.LB_RechercheMots.TabIndex = 15;
             this.LB_RechercheMots.Text = "Titre";
             // 
-            // BT_Refresh
-            // 
-            this.BT_Refresh.Location = new System.Drawing.Point(175, 21);
-            this.BT_Refresh.Name = "BT_Refresh";
-            this.BT_Refresh.Size = new System.Drawing.Size(75, 23);
-            this.BT_Refresh.TabIndex = 16;
-            this.BT_Refresh.Text = "Refresh";
-            this.BT_Refresh.UseVisualStyleBackColor = true;
-            this.BT_Refresh.Click += new System.EventHandler(this.BT_Refresh_Click);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(256, 21);
+            this.button1.Location = new System.Drawing.Point(175, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 17;
@@ -177,13 +124,123 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // DGV_Disque
+            // 
+            this.DGV_Disque.AllowUserToAddRows = false;
+            this.DGV_Disque.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Disque.Location = new System.Drawing.Point(13, 51);
+            this.DGV_Disque.Name = "DGV_Disque";
+            this.DGV_Disque.ReadOnly = true;
+            this.DGV_Disque.Size = new System.Drawing.Size(664, 156);
+            this.DGV_Disque.TabIndex = 18;
+            this.DGV_Disque.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Disque_CellDoubleClick_1);
+            this.DGV_Disque.SelectionChanged += new System.EventHandler(this.DGV_Disque_SelectionChanged_1);
+            // 
+            // TB_Nom
+            // 
+            this.TB_Nom.Location = new System.Drawing.Point(13, 227);
+            this.TB_Nom.Name = "TB_Nom";
+            this.TB_Nom.ReadOnly = true;
+            this.TB_Nom.Size = new System.Drawing.Size(100, 20);
+            this.TB_Nom.TabIndex = 19;
+            // 
+            // TB_Chanteur
+            // 
+            this.TB_Chanteur.Location = new System.Drawing.Point(119, 227);
+            this.TB_Chanteur.Name = "TB_Chanteur";
+            this.TB_Chanteur.ReadOnly = true;
+            this.TB_Chanteur.Size = new System.Drawing.Size(100, 20);
+            this.TB_Chanteur.TabIndex = 20;
+            // 
+            // TB_Annee
+            // 
+            this.TB_Annee.Location = new System.Drawing.Point(225, 227);
+            this.TB_Annee.Name = "TB_Annee";
+            this.TB_Annee.ReadOnly = true;
+            this.TB_Annee.Size = new System.Drawing.Size(100, 20);
+            this.TB_Annee.TabIndex = 21;
+            // 
+            // TB_Categorie
+            // 
+            this.TB_Categorie.Location = new System.Drawing.Point(331, 227);
+            this.TB_Categorie.Name = "TB_Categorie";
+            this.TB_Categorie.ReadOnly = true;
+            this.TB_Categorie.Size = new System.Drawing.Size(100, 20);
+            this.TB_Categorie.TabIndex = 22;
+            // 
+            // LB_Nom
+            // 
+            this.LB_Nom.AutoSize = true;
+            this.LB_Nom.Location = new System.Drawing.Point(13, 212);
+            this.LB_Nom.Name = "LB_Nom";
+            this.LB_Nom.Size = new System.Drawing.Size(79, 13);
+            this.LB_Nom.TabIndex = 23;
+            this.LB_Nom.Text = "Nom de l\'album";
+            // 
+            // LB_Chanteur
+            // 
+            this.LB_Chanteur.AutoSize = true;
+            this.LB_Chanteur.Location = new System.Drawing.Point(119, 212);
+            this.LB_Chanteur.Name = "LB_Chanteur";
+            this.LB_Chanteur.Size = new System.Drawing.Size(50, 13);
+            this.LB_Chanteur.TabIndex = 24;
+            this.LB_Chanteur.Text = "Chanteur";
+            // 
+            // LB_Annee
+            // 
+            this.LB_Annee.AutoSize = true;
+            this.LB_Annee.Location = new System.Drawing.Point(225, 212);
+            this.LB_Annee.Name = "LB_Annee";
+            this.LB_Annee.Size = new System.Drawing.Size(92, 13);
+            this.LB_Annee.TabIndex = 25;
+            this.LB_Annee.Text = "Année de la sortie";
+            // 
+            // LB_Categorie
+            // 
+            this.LB_Categorie.AutoSize = true;
+            this.LB_Categorie.Location = new System.Drawing.Point(331, 212);
+            this.LB_Categorie.Name = "LB_Categorie";
+            this.LB_Categorie.Size = new System.Drawing.Size(52, 13);
+            this.LB_Categorie.TabIndex = 26;
+            this.LB_Categorie.Text = "Catégorie";
+            // 
+            // BT_Precedent
+            // 
+            this.BT_Precedent.Location = new System.Drawing.Point(437, 225);
+            this.BT_Precedent.Name = "BT_Precedent";
+            this.BT_Precedent.Size = new System.Drawing.Size(75, 23);
+            this.BT_Precedent.TabIndex = 27;
+            this.BT_Precedent.Text = "Précédent";
+            this.BT_Precedent.UseVisualStyleBackColor = true;
+            this.BT_Precedent.Click += new System.EventHandler(this.BT_Precedent_Click);
+            // 
+            // BT_Suivant
+            // 
+            this.BT_Suivant.Location = new System.Drawing.Point(518, 224);
+            this.BT_Suivant.Name = "BT_Suivant";
+            this.BT_Suivant.Size = new System.Drawing.Size(75, 23);
+            this.BT_Suivant.TabIndex = 28;
+            this.BT_Suivant.Text = "Suivant";
+            this.BT_Suivant.UseVisualStyleBackColor = true;
+            this.BT_Suivant.Click += new System.EventHandler(this.BT_Suivant_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 219);
+            this.ClientSize = new System.Drawing.Size(689, 259);
+            this.Controls.Add(this.BT_Suivant);
+            this.Controls.Add(this.BT_Precedent);
+            this.Controls.Add(this.LB_Categorie);
+            this.Controls.Add(this.LB_Annee);
+            this.Controls.Add(this.LB_Chanteur);
+            this.Controls.Add(this.LB_Nom);
+            this.Controls.Add(this.TB_Categorie);
+            this.Controls.Add(this.TB_Annee);
+            this.Controls.Add(this.TB_Chanteur);
+            this.Controls.Add(this.TB_Nom);
+            this.Controls.Add(this.DGV_Disque);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.BT_Refresh);
             this.Controls.Add(this.LB_RechercheMots);
             this.Controls.Add(this.LB_RechercheCategorie);
             this.Controls.Add(this.LB_Recherche);
@@ -191,7 +248,6 @@
             this.Controls.Add(this.BT_Ajouter);
             this.Controls.Add(this.CB_Recherche);
             this.Controls.Add(this.TB_Recherche);
-            this.Controls.Add(this.DGV_Disque);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -204,7 +260,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView DGV_Disque;
         private System.Windows.Forms.TextBox TB_Recherche;
         private System.Windows.Forms.ComboBox CB_Recherche;
         private System.Windows.Forms.Button BT_Ajouter;
@@ -212,13 +267,18 @@
         private System.Windows.Forms.Label LB_Recherche;
         private System.Windows.Forms.Label LB_RechercheCategorie;
         private System.Windows.Forms.Label LB_RechercheMots;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numSequentiel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nomDisque;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nomArtiste;
-        private System.Windows.Forms.DataGridViewTextBoxColumn annee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn categorie;
-        private System.Windows.Forms.Button BT_Refresh;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView DGV_Disque;
+        private System.Windows.Forms.TextBox TB_Nom;
+        private System.Windows.Forms.TextBox TB_Chanteur;
+        private System.Windows.Forms.TextBox TB_Annee;
+        private System.Windows.Forms.TextBox TB_Categorie;
+        private System.Windows.Forms.Label LB_Nom;
+        private System.Windows.Forms.Label LB_Chanteur;
+        private System.Windows.Forms.Label LB_Annee;
+        private System.Windows.Forms.Label LB_Categorie;
+        private System.Windows.Forms.Button BT_Precedent;
+        private System.Windows.Forms.Button BT_Suivant;
     }
 }
 
