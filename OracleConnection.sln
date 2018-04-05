@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleConnection", "OracleConnection\OracleConnection.csproj", "{7D600EC5-EF46-45BA-9B95-544E278ED39B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleConn", "OracleConnection\OracleConn.csproj", "{7D600EC5-EF46-45BA-9B95-544E278ED39B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

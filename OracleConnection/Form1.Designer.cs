@@ -31,6 +31,7 @@
             this.DGV_Disque = new System.Windows.Forms.DataGridView();
             this.numSequentiel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nomDisque = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomArtiste = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.annee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categorie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TB_Recherche = new System.Windows.Forms.TextBox();
@@ -40,6 +41,7 @@
             this.LB_Recherche = new System.Windows.Forms.Label();
             this.LB_RechercheCategorie = new System.Windows.Forms.Label();
             this.LB_RechercheMots = new System.Windows.Forms.Label();
+            this.BT_Refresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Disque)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,13 +52,15 @@
             this.DGV_Disque.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.numSequentiel,
             this.nomDisque,
+            this.nomArtiste,
             this.annee,
             this.categorie});
             this.DGV_Disque.Location = new System.Drawing.Point(12, 51);
             this.DGV_Disque.Name = "DGV_Disque";
-            this.DGV_Disque.Size = new System.Drawing.Size(551, 150);
+            this.DGV_Disque.Size = new System.Drawing.Size(665, 150);
             this.DGV_Disque.TabIndex = 8;
-            this.DGV_Disque.DoubleClick += new System.EventHandler(this.DGV_Disque_DoubleClick);
+            this.DGV_Disque.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Disque_CellDoubleClick);
+            this.DGV_Disque.SelectionChanged += new System.EventHandler(this.DGV_Disque_SelectionChanged);
             // 
             // numSequentiel
             // 
@@ -69,6 +73,12 @@
             this.nomDisque.HeaderText = "Nom du disque";
             this.nomDisque.Name = "nomDisque";
             this.nomDisque.Width = 125;
+            // 
+            // nomArtiste
+            // 
+            this.nomArtiste.HeaderText = "Nom de l\'artiste";
+            this.nomArtiste.Name = "nomArtiste";
+            this.nomArtiste.Width = 125;
             // 
             // annee
             // 
@@ -84,7 +94,7 @@
             // 
             // TB_Recherche
             // 
-            this.TB_Recherche.Location = new System.Drawing.Point(463, 25);
+            this.TB_Recherche.Location = new System.Drawing.Point(577, 25);
             this.TB_Recherche.Name = "TB_Recherche";
             this.TB_Recherche.Size = new System.Drawing.Size(100, 20);
             this.TB_Recherche.TabIndex = 9;
@@ -92,7 +102,7 @@
             // CB_Recherche
             // 
             this.CB_Recherche.FormattingEnabled = true;
-            this.CB_Recherche.Location = new System.Drawing.Point(336, 24);
+            this.CB_Recherche.Location = new System.Drawing.Point(450, 24);
             this.CB_Recherche.Name = "CB_Recherche";
             this.CB_Recherche.Size = new System.Drawing.Size(121, 21);
             this.CB_Recherche.TabIndex = 10;
@@ -105,6 +115,7 @@
             this.BT_Ajouter.TabIndex = 11;
             this.BT_Ajouter.Text = "Ajouter";
             this.BT_Ajouter.UseVisualStyleBackColor = true;
+            this.BT_Ajouter.Click += new System.EventHandler(this.BT_Ajouter_Click);
             // 
             // BT_Modifier
             // 
@@ -114,11 +125,12 @@
             this.BT_Modifier.TabIndex = 12;
             this.BT_Modifier.Text = "Modifier";
             this.BT_Modifier.UseVisualStyleBackColor = true;
+            this.BT_Modifier.Click += new System.EventHandler(this.BT_Modifier_Click);
             // 
             // LB_Recherche
             // 
             this.LB_Recherche.AutoSize = true;
-            this.LB_Recherche.Location = new System.Drawing.Point(267, 28);
+            this.LB_Recherche.Location = new System.Drawing.Point(381, 28);
             this.LB_Recherche.Name = "LB_Recherche";
             this.LB_Recherche.Size = new System.Drawing.Size(63, 13);
             this.LB_Recherche.TabIndex = 13;
@@ -127,7 +139,7 @@
             // LB_RechercheCategorie
             // 
             this.LB_RechercheCategorie.AutoSize = true;
-            this.LB_RechercheCategorie.Location = new System.Drawing.Point(333, 9);
+            this.LB_RechercheCategorie.Location = new System.Drawing.Point(447, 9);
             this.LB_RechercheCategorie.Name = "LB_RechercheCategorie";
             this.LB_RechercheCategorie.Size = new System.Drawing.Size(52, 13);
             this.LB_RechercheCategorie.TabIndex = 14;
@@ -136,17 +148,28 @@
             // LB_RechercheMots
             // 
             this.LB_RechercheMots.AutoSize = true;
-            this.LB_RechercheMots.Location = new System.Drawing.Point(460, 9);
+            this.LB_RechercheMots.Location = new System.Drawing.Point(574, 9);
             this.LB_RechercheMots.Name = "LB_RechercheMots";
             this.LB_RechercheMots.Size = new System.Drawing.Size(28, 13);
             this.LB_RechercheMots.TabIndex = 15;
             this.LB_RechercheMots.Text = "Titre";
             // 
+            // BT_Refresh
+            // 
+            this.BT_Refresh.Location = new System.Drawing.Point(175, 21);
+            this.BT_Refresh.Name = "BT_Refresh";
+            this.BT_Refresh.Size = new System.Drawing.Size(75, 23);
+            this.BT_Refresh.TabIndex = 16;
+            this.BT_Refresh.Text = "Refresh";
+            this.BT_Refresh.UseVisualStyleBackColor = true;
+            this.BT_Refresh.Click += new System.EventHandler(this.BT_Refresh_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 219);
+            this.ClientSize = new System.Drawing.Size(689, 219);
+            this.Controls.Add(this.BT_Refresh);
             this.Controls.Add(this.LB_RechercheMots);
             this.Controls.Add(this.LB_RechercheCategorie);
             this.Controls.Add(this.LB_Recherche);
@@ -168,10 +191,6 @@
 
         #endregion
         private System.Windows.Forms.DataGridView DGV_Disque;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numSequentiel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nomDisque;
-        private System.Windows.Forms.DataGridViewTextBoxColumn annee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn categorie;
         private System.Windows.Forms.TextBox TB_Recherche;
         private System.Windows.Forms.ComboBox CB_Recherche;
         private System.Windows.Forms.Button BT_Ajouter;
@@ -179,6 +198,12 @@
         private System.Windows.Forms.Label LB_Recherche;
         private System.Windows.Forms.Label LB_RechercheCategorie;
         private System.Windows.Forms.Label LB_RechercheMots;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numSequentiel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nomDisque;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nomArtiste;
+        private System.Windows.Forms.DataGridViewTextBoxColumn annee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categorie;
+        private System.Windows.Forms.Button BT_Refresh;
     }
 }
 

@@ -23,3 +23,4 @@ C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\De
 C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.exe
 C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.pdb
 C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.Ajouter.resources
+C:\Users\201563814\source\repos\OracleConnection - Copie\OracleConnection\obj\Debug\OracleConnection.Modifier.resources
